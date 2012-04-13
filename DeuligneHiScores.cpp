@@ -296,6 +296,7 @@ void
 DeuligneHiScores::writeScore(int index)
 {
   if (writeMagic_) {
+    // Avoid infinite recursion because writeScore is called below
     writeMagic_ = false;
     // Initialize region
     byte byteL = lowByte(magic_);
@@ -381,3 +382,15 @@ DeuligneHiScores::display()
   }
 }
 
+void
+DeuligneHiScores::reset()
+{
+  for (int i = 0; i < number_; ++i)
+  {
+    this->scores[i].value = 0x0f - i;
+    this->scores[i].name[0] = 'A';
+    this->scores[i].name[1] = 'A';
+    this->scores[i].name[2] = 'A';
+    writeScore(i);
+  }
+}

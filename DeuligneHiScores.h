@@ -45,8 +45,13 @@ class DeuligneHiScores
 public:
   DeuligneHiScores(Deuligne &lcd);
   void begin(unsigned int number = 5, unsigned int address = 0, unsigned int magic = 0xC15E);
+  // Insert score.  If return value is true, score has been inserted,
+  // otherwise it was not a high score.
   bool insert(unsigned long score, bool checkOnly = false);
+  // Display high scores
   void display();
+  // Reset all scores to 0
+  void reset();
 private:
   void confirmOverwrite();
   void enterName(int index);
